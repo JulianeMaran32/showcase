@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: showcase
+  datasource:
+    url: jdbc:mysql://localhost:3306/showcase_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    web: DEBUG
+    org.springframework.security.web.FilterChainProxy: DEBUG

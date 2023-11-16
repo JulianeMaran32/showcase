@@ -1,0 +1,45 @@
+### actuator
+GET http://localhost:8080/api/actuator/health
+
+### address
+GET http://localhost:8080/api/address
+
+### create customer
+POST http://localhost:8080/api/customers
+Content-Type: application/json
+
+{
+  "first_name": "Jaqueline Jéssica",
+  "last_name": "Brito",
+  "email": "brito@galvao.com",
+  "document_number": "12345678910",
+  "password": "OUWAMIGoQG"
+}
+
+### update customer
+PUT http://localhost:8080/api/customers/{id}
+Content-Type: application/json
+
+{
+  "first_name": "Jaqueline Jéssica",
+  "last_name": "Brito",
+  "email": "jaqueline.jessica.brito@galvao.com",
+  "document_number": "04277937500",
+  "address": {
+    "number": "979",
+    "zip_code": "77001386",
+    "street": "Quadra 307 Norte Avenida NS 15"
+  },
+  "password": "OUWAMIGoQG"
+}
+
+### get customer by id
+GET http://localhost:8080/api/customers/1
+
+### activate customer
+PATCH http://localhost:8080/api/customers/1/activate
+Content-Type: application/json
+
+### deactivate customer
+PATCH http://localhost:8080/api/customers/1/deactivate
+Content-Type: application/json
