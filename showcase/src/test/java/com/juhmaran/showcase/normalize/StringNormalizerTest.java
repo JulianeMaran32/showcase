@@ -16,11 +16,6 @@ class StringNormalizerTest {
         assertFalse(Normalizer.isNormalized("āăąēîïĩíĝġńñšŝśûůŷ", Normalizer.Form.NFKD));
     }
 
-    /**
-     * "Traduz para Português Brasil: given String With Nondecomposable Unicode Characters
-     * when Remove Accents With Apache Commons then Return Modified String"
-     */
-
     @Test
     @DisplayName(value = "Dada uma string com caracteres Unicode decomponíveis, ao remover os acentos, " +
             "será retornada uma string ASCII.")
