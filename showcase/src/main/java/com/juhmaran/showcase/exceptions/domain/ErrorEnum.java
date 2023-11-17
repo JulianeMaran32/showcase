@@ -10,9 +10,10 @@ public enum ErrorEnum {
     BAD_REQUEST(400, "ARGUMENT NOT VALID", "Requisição inválida"),
     EMAIL_ALREADY_EXISTS(400, "EMAIL ALREADY EXISTS", "E-mail já está em uso."),
     DOCUMENT_NUMBER_ALREADY_EXISTS(400, "DOCUMENT NUMBER ALREADY EXISTS",
-            "O número de documento (CPF) já está em uso."),
+            "O documento já está em uso."),
     CUSTOMER_NOT_ACTIVE(400, "CUSTOMER NOT ACTIVE",
             "Cliente não ativo. Ativar conta ou realizar cadastro"),
+    DOCUMENT_NUMBER_CANNOT_BE_NULL(400, "DOCUMENT NUMBER CANNOT BE NULL", "O documento não pode ser nulo."),
 
     UNAUTHORIZED(401, "UNAUTHORIZED", "Usuário não autenticado. Faça o login para acessar."),
 

@@ -92,4 +92,10 @@ public class ShowcaseExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ErrorModelCreate.internalServerError(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(DocumentNumberCannotBeNullException.class)
+    protected ResponseEntity<Object> handleDocumentNumberCannotBeNullException(DocumentNumberCannotBeNullException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ErrorModelCreate.documentNumberCannotBeNull(), HttpStatus.BAD_REQUEST);
+    }
+
 }

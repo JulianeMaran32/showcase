@@ -1,0 +1,21 @@
+{
+  "id": "<int64>",
+  "first_name": "<string>",
+  "last_name": "<string>",
+  "document_number": "<string>",
+  "phone_number": "<string>",
+  "email": "<string>",
+  "password": "<string>",
+  "address": {
+    "zip_code": "<string>",
+    "street": "<string>",
+    "complement": "<string>",
+    "number": "<string>",
+    "neighborhood": "<string>",
+    "city": "<string>",
+    "state": "<string>"
+  },
+  "active": "<boolean>",
+  "created_at": "<date>",
+  "update_at": "<date>"
+}

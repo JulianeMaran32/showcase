@@ -94,4 +94,11 @@ public class ErrorModelCreate {
                 .message(ErrorEnum.INTERNAL_SERVER_ERROR.getMessage());
     }
 
+    public static ErrorModelCreate documentNumberCannotBeNull() {
+        return ErrorModel.create()
+                .status(ErrorEnum.DOCUMENT_NUMBER_CANNOT_BE_NULL.getStatus())
+                .code(ErrorEnum.DOCUMENT_NUMBER_CANNOT_BE_NULL.getCode())
+                .message(ErrorEnum.DOCUMENT_NUMBER_CANNOT_BE_NULL.getMessage());
+    }
+
 }
