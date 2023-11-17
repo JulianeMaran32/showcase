@@ -23,18 +23,21 @@ public class CustomerValidationUtil {
     }
 
     public void checkCustomerStatus(Customer customer) {
-        if (!customer.isActive()) {
-            throw new CustomerNotActiveException();
-        }
+//        if (!customer.isActive()) {
+//            throw new CustomerNotActiveException();
+//        }
     }
-
     public void validateCustomerData(CustomerRequest customerRequest) {
         if (repository.existsByEmail(customerRequest.getEmail())) {
-            throw new EmailAlreadyExistsException("O email já está em uso");
+            throw new EmailAlreadyExistsException();
+        }
+
+        if (customerRequest.getDocumentNumber() == null) {
+            throw new DocumentNumberCannotBeNullException();
         }
 
         if (repository.existsByDocumentNumber(customerRequest.getDocumentNumber())) {
-            throw new DocumentNumberAlreadyExistsException("O documento já está em uso");
+            throw new DocumentNumberAlreadyExistsException();
         }
     }
 
@@ -46,6 +49,25 @@ public class CustomerValidationUtil {
             throw new InternalServerErrorException("Erro ao salvar o cliente", e);
         }
     }
+
+//    public void validateCustomerData(CustomerRequest customerRequest) {
+//        if (repository.existsByEmail(customerRequest.getEmail())) {
+//            throw new EmailAlreadyExistsException("O email já está em uso");
+//        }
+//
+//        if (repository.existsByDocumentNumber(customerRequest.getDocumentNumber())) {
+//            throw new DocumentNumberAlreadyExistsException("O documento já está em uso");
+//        }
+//    }
+//
+//    public Customer saveCustomer(Customer customer) {
+//        try {
+//            return repository.save(customer);
+//        } catch (InternalServerErrorException e) {
+//            log.info("Erro ao salvar o cliente {}: ", customer);
+//            throw new InternalServerErrorException("Erro ao salvar o cliente", e);
+//        }
+//    }
 
     public Customer getCustomerByIdAndVerifyStatus(Long id) {
         try {

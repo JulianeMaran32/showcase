@@ -31,7 +31,7 @@ public class CustomerService {
     public CustomerResponse createCustomer(CustomerRequest customerRequest) {
         util.validateCustomerData(customerRequest);
         Customer customer = customerMapper.customerRequestToCustomer(customerRequest);
-        customer.setActive(true);
+//        customer.setActive(true);
         customer.setCreatedAt(LocalDateTime.now());
         customer = util.saveCustomer(customer);
         return customerMapper.customerToCustomerResponse(customer);
