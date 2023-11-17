@@ -1,2 +1,6 @@
-package com.juhmaran.showcase.domain.model;public enum Status {
+package com.juhmaran.showcase.domain.model;
+
+public enum Status {
+    ACTIVE,
+    INACTIVE
 }
