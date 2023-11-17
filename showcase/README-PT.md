@@ -3,7 +3,7 @@
 Este projeto é um exemplo de implementação de um sistema Java Spring Boot com um conjunto de funcionalidades comuns. O
 projeto pode ser usado como ponto de partida para o desenvolvimento de outros sistemas.
 
-O projeto inclui as seguintes características:
+### O projeto inclui as seguintes características:
 
 * **Testes de normalização e similaridade:** testes automatizados para verificar se os dados estão sendo normalizados e
   se são suficientemente similares para serem considerados iguais.
@@ -13,16 +13,6 @@ O projeto inclui as seguintes características:
 * **Configuração do Lombok e MapStruct:** configuração das bibliotecas Lombok e MapStruct.
 * **Docker:** O projeto utiliza o Docker para executar a aplicação. Isso significa que a aplicação pode ser executada em
   qualquer ambiente que tenha o Docker instalado.
-
---- 
-
-## Tecnologias
-
-* Java 17
-* Spring Boot 3
-* Docker
-* Maven
-* MySQL 8
 
 ---
 

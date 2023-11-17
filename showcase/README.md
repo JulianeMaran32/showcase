@@ -2,10 +2,7 @@
 
 * [PT-BR](./README-PT.md)
 
-This project is an example of an implementation of a Java Spring Boot system with a set of common features. The project
-can be used as a starting point for the development of other systems.
-
-The project includes the following features:
+### The project includes the following features:
 
 * **Normalization and similarity tests:** automated tests to verify if the data is being normalized and if it is similar
   enough to be considered equal.
@@ -15,16 +12,6 @@ The project includes the following features:
 * **Lombok and MapStruct configuration:** configuration of the Lombok and MapStruct libraries.
 * **Docker:** The project uses Docker to run the application. This means that the application can be run on any
   environment that has Docker installed.
-
---- 
-
-## Technologies
-
-* Java 17
-* Spring Boot 3
-* Docker
-* Maven
-* MySQL 8
 
 ---
 
