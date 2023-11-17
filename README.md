@@ -21,3 +21,10 @@ PT: Este projeto é um exemplo de implementação de um sistema Java Spring Boot
 * Lombok and MapStruct configuration
 * Docker
 * Logging
+
+## Other projects
+
+* [Apache Kafka](https://github.com/JulianeMaran32/examples-microservices-with-springboot/tree/master/kafka)
+* [Architecture](https://github.com/JulianeMaran32/arquitetura)
+* [Authentication and Authorization](https://github.com/JulianeMaran32/examples-microservices-with-springboot/tree/master/authentication/ms-auth)
+* [Generate Token](https://github.com/JulianeMaran32/examples-microservices-with-springboot/tree/master/authentication/ms-generate-token)
