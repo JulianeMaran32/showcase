@@ -1,6 +1,9 @@
 ### actuator
 GET http://localhost:8080/api/actuator/health
 
+###
+GET http://localhost:8080/api
+
 ### address
 GET http://localhost:8080/api/address
 
@@ -9,10 +12,15 @@ POST http://localhost:8080/api/customers
 Content-Type: application/json
 
 {
-  "first_name": "Jaqueline Jéssica",
-  "last_name": "Brito",
-  "email": "brito@galvao.com",
-  "document_number": "12345678910",
+  "address": {
+    "number": "979",
+    "street": "Quadra 307 Norte Avenida NS 15",
+    "zip_code": "77001386"
+  },
+  "documentNumber": "04277937500",
+  "email": "",
+  "firstName": "Jaqueline Jéssica",
+  "lastName": "Brito",
   "password": "OUWAMIGoQG"
 }
 
@@ -21,15 +29,15 @@ PUT http://localhost:8080/api/customers/{id}
 Content-Type: application/json
 
 {
-  "first_name": "Jaqueline Jéssica",
-  "last_name": "Brito",
-  "email": "jaqueline.jessica.brito@galvao.com",
-  "document_number": "04277937500",
   "address": {
     "number": "979",
-    "zip_code": "77001386",
-    "street": "Quadra 307 Norte Avenida NS 15"
+    "street": "Quadra 307 Norte Avenida NS 15",
+    "zip_code": "77001386"
   },
+  "document_number": "04277937500",
+  "email": "jaqueline.jessica.brito@galvao.com",
+  "first_name": "Jaqueline Jéssica",
+  "last_name": "Brito",
   "password": "OUWAMIGoQG"
 }
 

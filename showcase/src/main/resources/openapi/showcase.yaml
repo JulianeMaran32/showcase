@@ -1,9 +1,410 @@
 openapi: 3.0.3
 info:
-  title: $Title$
-  description: $Title$
+  title: Showcase
+  description: |-
+    Este projeto é um exemplo de implementação de um sistema Java Spring Boot com um conjunto de funcionalidades comuns. 
+    O projeto pode ser usado como ponto de partida para o desenvolvimento de outros sistemas.
+    
+    **Tecnlogias**
+    * Java 17
+    * Spring Boot 3
+    * Docker
+    * Maven
+    * MySQL 8
+    * Apache Kafka
+    
+    **Características**
+    * Testes de Normalização e Similaridade
+    * Exception Handler
+    * Bibliotecas: Lombok, MapStruct, Jackson
+    * MySQL Database: showcase_db
+    * Configuração do Lombok e MapStruct
+    * Logging 
+    * Autenticação e Autorização (OAuth2)
+    * Gerar Token
+    * Utilização de API externa Via CEP
+    * Envio de e-mail
   version: 1.0.0
+  contact:
+    name: 'Juliane Maran'
+    email: 'julianemaran@gmail.com'
+    url: 'https://github.com/JulianeMaran32/showcase'
+  license:
+    name: 'Apache 2.0'
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+externalDocs:
+  description: 'Saiba mais sobre o projeto'
+  url: 'https://github.com/JulianeMaran32/showcase'
 servers:
-  - url: '$https$'
+  - url: 'http://localhost:8080/api'
+tags:
+  - name: customer
+    description: 'Gerenciamento de Clientes'
+  - name: address
+    description: 'Gerenciamento de Endereços'
+    externalDocs:
+      description: 'API externa Via CEP'
+      url: 'https://viacep.com.br/'
 paths:
-  $END$
+  /customers:
+    post:
+      tags:
+        - customer
+      summary: 'Cadastrar Cliente'
+      security:
+        - basicAuth: [ ]
+      description: 'Cadastrar Cliente'
+      operationId: createCustomer
+      requestBody:
+        description: 'Os campos da requisição devem ser preenchidos corretamente.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '201':
+          description: 'CREATED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: 'BAD REQUEST'
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: 'NOT FOUND'
+          $ref: '#/components/responses/NotFound'
+        '500':
+          description: 'INTERNAL SERVER ERROR'
+          $ref: '#/components/responses/InternalServerError'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /customers/{id}:
+    description: 'parâmetros comum'
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags:
+        - customer
+      summary: 'Obter Cliente'
+      security:
+        - basicAuth: [ ]
+      description: 'Obter cliente por ID'
+      operationId: getCustomerById
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: 'BAD REQUEST'
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: 'NOT FOUND'
+          $ref: '#/components/responses/NotFound'
+        '500':
+          description: 'INTERNAL SERVER ERROR'
+          $ref: '#/components/responses/InternalServerError'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - customer
+      summary: 'Atualizar Cliente'
+      security:
+        - basicAuth: [ ]
+      description: 'Atualizar dados do cliente'
+      operationId: updateCustomer
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: 'BAD REQUEST'
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: 'NOT FOUND'
+          $ref: '#/components/responses/NotFound'
+        '500':
+          description: 'INTERNAL SERVER ERROR'
+          $ref: '#/components/responses/InternalServerError'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - customer
+      summary: 'Excluir Cliente'
+      security:
+        - basicAuth: [ ]
+      description: 'Excluir cliente por ID'
+      operationId: deleteCustomer
+      responses:
+        '204':
+          description: 'OK'
+        '400':
+          description: 'BAD REQUEST'
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          description: 'NOT FOUND'
+          $ref: '#/components/responses/NotFound'
+        '500':
+          description: 'INTERNAL SERVER ERROR'
+          $ref: '#/components/responses/InternalServerError'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    # reusable schemas (data models)
+    Customer:
+      required:
+        - firstName
+        - lastName
+        - email
+        - phoneNumber
+        - documentNumber
+        - password
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          description: 'deve ser gerado automaticamente pelo banco de dados'
+        firstName:
+          type: string
+          minLength: 3
+        lastName:
+          type: string
+          minLength: 3
+        email:
+          type: string
+          example: 'customer@email.com'
+          description: 'email deve ser válido'
+          uniqueItems: true
+        phoneNumber:
+          type: string
+          example: '+5511998765432'
+          description: 'número de telefone com DDI e DDD. O sinal de + é opcional.'
+          pattern: '^'
+        documentNumber:
+          type: string
+          example: '04277937500'
+          description: 'número de CPF válido'
+          minLength: 11
+          maxLength: 11
+          uniqueItems: true
+        password:
+          type: string
+          minLength: 8
+          description: 'senha deve ter números, letras, caracteres'
+        addressRequest:
+          type: object
+          items:
+            $ref: '#/components/schemas/Address'
+    Address:
+      required:
+        - zipCode
+        - number
+      type: object
+      externalDocs:
+        description: 'API externa Via CEP'
+        url: 'https://viacep.com.br/'
+      properties:
+        number:
+          type: string
+          example: '123'
+        zipCode:
+          type: string
+          example: '77001386'
+          description: 'deve ser um número de CEP válido'
+        complement:
+          type: string
+          example: 'Quadra 307 Norte'
+        street:
+          type: string
+          example: 'Avenida NS 15'
+        neighborhood:
+          type: string
+          example: ''
+        city:
+          type: string
+          example: 'São Paulo'
+        state:
+          type: string
+          example: 'SP'
+    CustomerRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 3
+        lastName:
+          type: string
+          minLength: 3
+        email:
+          type: string
+          example: 'customer@email.com'
+          description: 'email deve ser válido'
+        phoneNumber:
+          type: string
+          example: '+5511998765432'
+          description: 'número de telefone com DDI e DDD. O sinal de + é opcional.'
+        documentNumber:
+          type: string
+          example: '04277937500'
+          description: 'número de CPF válido'
+        password:
+          type: string
+          minLength: 8
+          description: 'senha deve ter números, letras, caracteres'
+        addressRequest:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressRequest'
+    AddressRequest:
+      type: object
+      properties:
+        number:
+          type: string
+          example: '123'
+        zipCode:
+          type: string
+          example: '77001386'
+          description: 'deve ser um número de CEP válido'
+        complement:
+          type: string
+          example: 'Quadra 307 Norte'
+    CustomerResponse:
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 3
+        lastName:
+          type: string
+          minLength: 3
+        email:
+          type: string
+          example: 'customer@email.com'
+          description: 'email deve ser válido'
+        phoneNumber:
+          type: string
+          example: '+5511998765432'
+          description: 'número de telefone com DDI e DDD. O sinal de + é opcional.'
+        documentNumber:
+          type: string
+          example: '04277937500'
+          description: 'número de CPF válido'
+        password:
+          type: string
+          minLength: 8
+          description: 'senha deve ter números, letras, caracteres'
+        addressRequest:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressResponse'
+    AddressResponse:
+      type: object
+      properties:
+        number:
+          type: string
+          example: '123'
+        zipCode:
+          type: string
+          example: '77001386'
+          description: 'deve ser um número de CEP válido'
+        street:
+          type: string
+          example: 'Avenida NS 15'
+        complement:
+          type: string
+          example: 'Quadra 307 Norte'
+        neighborhood:
+          type: string
+          example: ''
+        city:
+          type: string
+          example: 'São Paulo'
+        state:
+          type: string
+          example: 'SP'
+    Error:
+      type: object
+      required:
+        - status
+        - code
+        - message
+      properties:
+        status:
+          type: integer
+        code:
+          type: string
+        message:
+          type: string
+  responses:
+    NotFound:
+      description: 'Not Found'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: 'Bad Request'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: 'Unauthorized'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: 'Internal Server Error'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+  parameters:
+  # reusable path, query, header and cookie parameter
+  requestBodies:
+  # reusable request bodies
+  callbacks:
+    # callbacks
+  examples:
+    # examples
+  headers:
+    # headers
+  links:
+    # links
